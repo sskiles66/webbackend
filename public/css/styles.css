@@ -1,4 +1,6 @@
 /******* Change Box Model ***************/
+
+/*https://coolors.co/08a4bd-aa78a6-d72638-302b27-f5f3f5 */
 *,
 *:before,
 *:after {
@@ -8,8 +10,10 @@
 
 
 #wrapper {
+  
   background-color: white;
-  max-width: 800px;
+  max-width: 1200px;
+  padding: 10px;
 }
 
 #vehicle-banner {
@@ -31,8 +35,16 @@
 }
 
 .siteName, #tools  {
-  background-color: red;
+  font-size: 20px;
+  
+  text-decoration: none;
 }
+
+.siteName a, #tools a  {
+  color: black;
+  text-decoration: none;
+}
+
 
 #top-header {
   display: flex;
@@ -42,21 +54,42 @@
 nav ul {
   display: flex;
   list-style-type: none;
-  justify-content: space-between;
-  padding: 0;
+  justify-content: space-around;
+  padding: 10px;
+  
+  font-family: 'Poiret One', cursive;
+  font-weight: bold;
+
+  
   
 }
 
+h1, h2, h3, a {
+  font-family: 'Poiret One', cursive;
+  font-weight: bold;
+}
+
+p, li {
+  font-family: 'IBM Plex Serif', serif;
+}
+
 nav {
-  background-color: aqua;
+  
+  background-color: #08A4BD;
 }
 
 .copyright {
   text-align: center;
 }
 
+#reviews {
+  line-height: 40px;
+}
+
 
 #upgrades {
+  
+  
   text-align: center;
   max-width: 400px;
   display: flex;
@@ -66,7 +99,7 @@ nav {
 }
 
 .upgrade {
-  background-color: aqua;
+  background-color: #08A4BD;
   width: 150px;
   padding: 10px;
   text-align: center;
@@ -84,10 +117,14 @@ nav {
 
   #section {
     display: flex;
+    justify-content: space-around;
   }
 
   #wrapper {
     margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: solid #08A4BD 10px;
   }
 
 
