@@ -22,12 +22,14 @@
 }
 
 #vehicle-mess {
+  width: 150px;
   text-align: left;
   background-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
   top: 0;
+  position: absolute;
   font-size: smaller;
   line-height: 0px;
+  padding: 5px;
 }
 
 #own{
@@ -112,7 +114,7 @@ nav {
 
 @media screen and (min-width: 450px) {
   body {
-    background: url("/images/site/checkerboard.jpg");
+    background: url("/images/site/small_check.jpg");
   }
 
   #section {
@@ -125,6 +127,14 @@ nav {
     margin-top: 20px;
     border-radius: 10px;
     border: solid #08A4BD 10px;
+  }
+
+  #vehicle-mess {
+    width: 40%;
+    text-align: center;
+    font-size: large;
+    top: 30px;
+    line-height: 10px;
   }
 
 
