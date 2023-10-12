@@ -115,6 +115,35 @@ nav {
   text-decoration: none;
 }
 
+
+/* Inventory Page */
+
+#inv-display  {
+  display: grid;
+  grid-template-columns: 1fr;
+  
+  list-style-type: none;
+
+  
+  
+  
+}
+
+#inv-display >* {
+  text-align: center;
+  margin: 20px;
+  margin-right: 50px;
+  padding: 10px;
+  background-color: #0ACDEB;
+  border-radius: 10px;
+}
+
+#inv-display li >* {
+  justify-items: center;
+  align-items: center;
+  
+}
+
 @media screen and (min-width: 450px) {
   body {
     background: url("/images/site/small_check.jpg");
@@ -138,6 +167,13 @@ nav {
     font-size: large;
     top: 30px;
     line-height: 10px;
+  }
+
+  #inv-display  {
+   
+    grid-template-columns: 1fr 1fr 1fr;
+    
+  
   }
 
 
