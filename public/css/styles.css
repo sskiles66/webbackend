@@ -144,6 +144,22 @@ nav {
   
 }
 
+
+
+/*inventory item view*/
+
+
+
+#car-image {
+
+  width: 70%;
+}
+
+
+#image-cont {
+  text-align: center;
+}
+
 @media screen and (min-width: 450px) {
   body {
     background: url("/images/site/small_check.jpg");
@@ -174,6 +190,12 @@ nav {
     grid-template-columns: 1fr 1fr 1fr;
     
   
+  }
+
+  #grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
   }
 
 

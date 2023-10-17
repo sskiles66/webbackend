@@ -58,4 +58,40 @@ Util.buildClassificationGrid = async function(data){
     return grid
   }
 
+
+  Util.buildInvItem = async function(data){
+    let grid
+    //console.log(data);
+    if(data.length > 0){
+      grid = '<div id="grid">'
+      data.forEach(vehicle => { 
+        var formatted_price = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(vehicle.inv_price);
+        var formatted_number = vehicle.inv_miles.toLocaleString('en-US');
+        grid += '<div id="image-cont">'
+        grid += '<img id="car-image" src=' + vehicle.inv_image  + '>' + '</img>'
+        grid += '</div>'
+        grid += '<div>'
+        grid += '<h2>' + vehicle.inv_make + " "+ vehicle.inv_model + " Details" + '</h2>'
+        grid += '<p>' + "Price: " + formatted_price + '</p>'
+        grid += '<p>' + "Description: " + vehicle.inv_description + '</p>'
+        grid += '<p>' + "Color: " + vehicle.inv_color + '</p>'
+        grid += '<p>' + "Miles: " + formatted_number + '</p>'
+        grid += '</div>'
+        grid += '</div>'
+      })
+    } else { 
+      grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    }
+    return grid
+  }
+
+
+  /* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+
 module.exports = Util
