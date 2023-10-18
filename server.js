@@ -52,7 +52,10 @@ app.use(async (req, res, next) => {
 *************************/
 
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
+  let nav = await utilities.getNav();
+  // let test = await utilities.buildClassificationGrid();
+  // let test2 = await utilities.buildInvItem();
+
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
   if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
