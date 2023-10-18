@@ -36,11 +36,17 @@ app.use("/inv", inventoryRoute)
 //The route will lead to a controller
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
+app.get("/500error", utilities.handleErrors(baseController.causeError));
+
 // app.get("/inv", utilities.handleErrors())
 
 
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+})
+
+app.use(async (req, res, next) => {
+  next({status: 500, message: 'Internal Server Error'})
 })
 
 
@@ -57,7 +63,7 @@ app.use(async (err, req, res, next) => {
   // let test2 = await utilities.buildInvItem();
 
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  if(err.status == 404 || err.status == 500){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
