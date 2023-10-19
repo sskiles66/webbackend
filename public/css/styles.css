@@ -136,11 +136,19 @@ nav {
   padding: 10px;
   background-color: #0ACDEB;
   border-radius: 10px;
+  border: solid 5px black;
 }
 
 #inv-display li >* {
   justify-items: center;
   align-items: center;
+  margin-top: 20px;
+  
+}
+
+#inv-display li img {
+
+  margin-top: 20px;
   
 }
 
@@ -152,7 +160,7 @@ nav {
 
 #car-image {
 
-  width: 70%;
+  width: 80%;
 }
 
 
@@ -195,6 +203,9 @@ nav {
   #grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
 
   }
 
