@@ -11,8 +11,35 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
+//const accountController = require("./controllers/accountController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
+const session = require("express-session")
+const pool = require('./database/')
+
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+
+
+
 
 
 /* ***********************
@@ -30,6 +57,7 @@ app.set("layout", "./layouts/layout")
  *************************/
 app.use(static)
 app.use("/inv", inventoryRoute)
+app.use("/account", require("./routes/accountRoute")) //could also be required above and be a variable
 
 
 // Index Route
@@ -38,6 +66,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 
 app.get("/500error", utilities.handleErrors(baseController.causeError));
 
+//app.get("/login", utilities.handleErrors(accountController.buildLogin))
+
 // app.get("/inv", utilities.handleErrors())
 
 
@@ -45,9 +75,9 @@ app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
 
-app.use(async (req, res, next) => {
-  next({status: 500, message: 'Internal Server Error'})
-})
+// app.use(async (req, res, next) => {
+//   next({status: 500, message: 'Internal Server Error'})
+// })
 
 
 
@@ -62,8 +92,8 @@ app.use(async (err, req, res, next) => {
   // let test = await utilities.buildClassificationGrid();
   // let test2 = await utilities.buildInvItem();
 
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404 || err.status == 500){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`) // Used to have message included with 500 error
+  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,

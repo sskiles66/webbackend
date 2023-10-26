@@ -20,8 +20,8 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 invCont.buildInvItem = async function (req, res, next) {
-  const classification_id = req.params.inv_id;
-  const data = await invModel.getInventoryItem(classification_id);
+  const inventory_id = req.params.inv_id; //Has to match the parameter in the route
+  const data = await invModel.getInventoryItem(inventory_id);
   const grid = await utilities.buildInvItem(data);
   let nav = await utilities.getNav();
   const itemYear = data[0].inv_year;
