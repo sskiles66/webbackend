@@ -1,4 +1,4 @@
-<title><%- title %></title>
+
 
 <h1><%- title %></h1>
 
@@ -15,7 +15,8 @@
 <div id="register">
     <form action="/account/registeration" method="post">
         <!-- In our code, we stored the variables as part of the validation process, and can now reuse them 
-            to make the form sticky. You will notice that we simply used "locals", which is a shorthand method for "res.locals". -->
+            to make the form sticky. You will notice that we simply used "locals", which is a shorthand method for "res.locals". 
+            This is in place of session stuff-->
         <label for="account_firstname">First name: </label><br>
         <input type="text" id="account_firstname" name="account_firstname" required value="<%= locals.account_firstname %>"><br>
 

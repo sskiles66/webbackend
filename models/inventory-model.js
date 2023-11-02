@@ -38,4 +38,13 @@ async function getInventoryByClassificationId(classification_id) {
       console.error("getinventoryitembyid error " + error)
     }
   }
-  module.exports = {getClassifications, getInventoryByClassificationId, getInventoryItem};
+
+  async function addNewClassification(classification_name){
+    try {
+      const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+      return await pool.query(sql, [classification_name])
+    } catch (error) {
+      return error.message
+    }
+  }
+  module.exports = {getClassifications, getInventoryByClassificationId, getInventoryItem, addNewClassification};
