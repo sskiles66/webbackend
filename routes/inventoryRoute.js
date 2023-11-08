@@ -13,15 +13,25 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 //router.get("/detail/:inv_id", invController.buildInvItem);
 router.get("/detail/:inv_id", utilities.handleErrors(invController.buildInvItem))
 
-router.get("/management", utilities.handleErrors(invController.buildManagement))
+router.get("/", utilities.handleErrors(invController.buildManagement))
 
 router.get("/newClassification", utilities.handleErrors(invController.buildNewClassification))
+
+router.get("/newInvItem", utilities.handleErrors(invController.buildNewInventoryItem))
 
 router.post(
     "/newClassification",
     classValidate.newClassificationRules(),
     classValidate.checkClassificationData,
     utilities.handleErrors(invController.addNewClassification),
+    
+  )
+
+router.post(
+    "/newInvItem",
+    classValidate.newInventoryItemRules(),
+    classValidate.checkInventoryData,
+    utilities.handleErrors(invController.addNewInventoryItem),
     
   )
 

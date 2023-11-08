@@ -11,11 +11,13 @@
    </ul>
   <% } %>
 
-<form action="/inv/newClassification" method="post">
+<div id="classification">
+    <form action="/inv/newClassification" method="post">
 
-    <label for="classification_name">Classification Name: </label><br>
-    <span>No spaces or special characters allowed.</span>
-    <input type="text" id="classification_name" name="classification_name" required pattern="^[a-zA-Z0-9]*$"><br>
-
-    <input type="submit" value="Add Classification">
-</form>
+        <label for="classification_name">Classification Name: </label><br>
+        <span>No spaces or special characters allowed.</span>
+        <input type="text" id="classification_name" name="classification_name" required pattern="^[a-zA-Z0-9]*$"><br>
+    
+        <input type="submit" value="Add Classification">
+    </form>
+</div>

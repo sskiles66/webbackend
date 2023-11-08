@@ -1,0 +1,59 @@
+<h1><%- title %></h1>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+
+  <div id="inventory">
+    <form action="/inv/newInvItem" method="post">
+        <label for="classification_id">Classification: </label><br>
+
+        <%- dropDown %>
+
+        <label for="inv_make">Make: </label><br>
+        <span>Min of 3 characters</span>
+        <input type="text" id="inv_make" name="inv_make" required minlength="3" value="<%= locals.inv_make %>"><br>
+
+        <label for="inv_model">Model: </label><br>
+        <span>Min of 3 characters</span>
+        <input type="text" id="inv_model" name="inv_model" required minlength="3" value="<%= locals.inv_model %>"><br>
+
+        <label for="inv_description">Description:</label>
+        <textarea id="inv_description" name="inv_description" required>
+        <%= locals.inv_description %>
+        </textarea>
+
+        <label for="inv_image">Image Path: </label><br>
+        <input type="text" id="inv_image" name="inv_image" required value="/images/vehicles/no-image.png"><br>
+
+        <label for="inv_thumbnail">Thumbnail Path: </label><br>
+        <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="/images/vehicles/no-image.png"><br>
+
+        <label for="inv_price">Price: </label><br>
+        <span>Decimal or Integer</span>
+        <input type="number" id="inv_price" name="inv_price" required step="0.01" value="<%= locals.inv_price %>"><br>
+
+        <label for="inv_year">Year: </label><br>
+        <span>Four digit year</span>
+        <input type="number" id="inv_year" name="inv_year" required min="1000" max="9999" value="<%= locals.inv_year %>"><br>
+
+        <label for="inv_miles">Miles: </label><br>
+        <span>Digits only</span>
+        <input type="number" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles %>"><br>
+
+        <label for="inv_color">Color: </label><br>
+        <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color %>"><br>
+
+        
+    
+        <input type="submit" value="Add Item">
+        
+    </form>
+</div>

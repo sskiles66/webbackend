@@ -172,7 +172,7 @@ nav {
 
 /*login page*/
 
-#login, #register {
+#login, #register, #classification, #inventory {
   text-align: center;
   background-color: #0ACDEB;
   width: 90%;
@@ -193,7 +193,7 @@ label {
   font-size: 1.2em;
 }
 
-input{
+input, textarea, select{
   padding: 10px;
   border-radius: 5px;
   border: none;
@@ -219,6 +219,17 @@ input:required:invalid, input:focus:invalid {
 input:required:valid {
   border: solid green 3px;
  }
+
+.notice li {
+  list-style-type: none;
+  
+}
+
+.notice {
+  padding: 10px;
+  background-color: #0ACDEB;
+  border-radius: 10px;
+}
 
 @media screen and (min-width: 450px) {
   body {
