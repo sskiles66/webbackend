@@ -31,10 +31,10 @@
         </textarea>
 
         <label for="inv_image">Image Path: </label><br>
-        <input type="text" id="inv_image" name="inv_image" required value="/images/vehicles/no-image.png"><br>
+        <input type="text" id="inv_image" name="inv_image" required value="/images/vehicles/no-image.png" pattern="(.*\.(jpe?g|png|webp)$)"><br>
 
         <label for="inv_thumbnail">Thumbnail Path: </label><br>
-        <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="/images/vehicles/no-image.png"><br>
+        <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="/images/vehicles/no-image.png" pattern="(.*\.(jpe?g|png|webp)$)"><br>
 
         <label for="inv_price">Price: </label><br>
         <span>Decimal or Integer</span>

@@ -64,12 +64,14 @@ validate.checkClassificationData = async (req, res, next) => {
         .trim()
         .escape() // Escape special characters
         .isLength({ min: 1 })
-        .withMessage("Image path is required"),
+        .matches(/(.*\.(jpe?g|png|webp)$)/i)
+        .withMessage("Image path is required and needs to be a valid path"),
         body("inv_thumbnail")
         .trim()
         .escape() // Escape special characters
         .isLength({ min: 1 })
-        .withMessage("Thumbnail path is required"),
+        .matches(/(.*\.(jpe?g|png|webp)$)/i)
+        .withMessage("Thumbnail path is required and needs to be a valid path"),
         body("inv_price")
         .trim()
         .escape() // Escape special characters
@@ -97,12 +99,12 @@ validate.checkClassificationData = async (req, res, next) => {
   };
   
   validate.checkInventoryData = async (req, res, next) => {
-    const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
+    const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      let dropDown = await utilities.buildClassDropDown();
+      let dropDown = await utilities.buildClassDropDown(classification_id);
       res.render("inventory/add-inventory", {
         errors,
         title: "Add Inventory Item",
@@ -118,7 +120,7 @@ validate.checkClassificationData = async (req, res, next) => {
         inv_miles, 
         inv_color,
 
-        // classification_name         Test for now, don't have locals set up anyway.
+        
       })
       return
     }

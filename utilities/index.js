@@ -85,15 +85,22 @@ Util.buildClassificationGrid = async function(data){
     return grid
   }
 
-  Util.buildClassDropDown = async function(req, res, next){
+  Util.buildClassDropDown = async function (classification_id = null) {
     let data = await invModel.getClassifications();
     let list = `<select name="classification_id" id="classification_id">`;
+  
     data.rows.forEach((row) => {
-      list += `<option value=${row.classification_id}>${row.classification_name}</option>`;
-    })
+      list += `<option value="${row.classification_id}"`;
+      if (classification_id != null && row.classification_id == classification_id) {
+        classification_id = row.classification_id;
+        list += ` selected `;
+      }
+      list += `>${row.classification_name}</option>`;
+    });
+  
     list += "</select>";
     return list;
-  }
+  };
 
   /* ****************************************
  * Middleware For Handling Errors
