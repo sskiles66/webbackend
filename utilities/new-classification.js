@@ -62,13 +62,13 @@ validate.checkClassificationData = async (req, res, next) => {
         .withMessage("Description is required"),
         body("inv_image")
         .trim()
-        .escape() // Escape special characters
+        // .escape() // Escape special characters
         .isLength({ min: 1 })
-        .matches(/(.*\.(jpe?g|png|webp)$)/i)
+        .matches(/(.*\.(jpe?g|png|webp)$)/i)  
         .withMessage("Image path is required and needs to be a valid path"),
         body("inv_thumbnail")
         .trim()
-        .escape() // Escape special characters
+        // .escape() // Escape special characters Used to have escape but it was creating issues with inserting bad data into the database
         .isLength({ min: 1 })
         .matches(/(.*\.(jpe?g|png|webp)$)/i)
         .withMessage("Thumbnail path is required and needs to be a valid path"),
@@ -119,6 +119,36 @@ validate.checkClassificationData = async (req, res, next) => {
         inv_year,
         inv_miles, 
         inv_color,
+
+        
+      })
+      return
+    }
+    next()
+  }
+
+  validate.checkUpdateData = async (req, res, next) => {
+    const { inv_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      let dropDown = await utilities.buildClassDropDown(classification_id);
+      res.render("inventory/edit-inventory", {
+        errors,
+        title: "Edit " + inv_make + " " + inv_model,
+        nav,
+        dropDown,
+        inv_make,
+        inv_model,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_year,
+        inv_miles, 
+        inv_color,
+        inv_id
 
         
       })

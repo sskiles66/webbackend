@@ -19,6 +19,15 @@ router.get("/newClassification", utilities.handleErrors(invController.buildNewCl
 
 router.get("/newInvItem", utilities.handleErrors(invController.buildNewInventoryItem))
 
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+
+//Builds edit view for chosen inventory item
+router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInvView))
+
+//Builds delete view for chosen inventory item
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteInvView))
+
 router.post(
     "/newClassification",
     classValidate.newClassificationRules(),
@@ -34,6 +43,19 @@ router.post(
     utilities.handleErrors(invController.addNewInventoryItem),
     
   )
+
+// For submit form on the edit inventory view
+router.post(
+  "/update/", 
+  classValidate.newInventoryItemRules(),
+  classValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory),
+  );
+
+router.post(
+  "/delete/", 
+  utilities.handleErrors(invController.deleteInventoryItem),
+  );
 
 // router.use(async (req, res, next) => {
 //     next({status: 404, message: 'Sorry, we appear to have lost that page.'})
