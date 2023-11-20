@@ -118,4 +118,19 @@ async function accountLogin(req, res) {
   }
  }
 
-  module.exports = { buildLogin, buildRegisteration, registerAccount, accountLogin, buildAccountManagement }
+ async function buildUpdateView(req, res, next) {
+  
+  let nav = await utilities.getNav();
+  
+  const account_id = parseInt(req.params.account_id);
+
+
+  res.render("./account/update", {
+    title: "Update Account",
+    nav,
+    errors: null, 
+    id: account_id
+  })
+}
+
+  module.exports = { buildLogin, buildRegisteration, registerAccount, accountLogin, buildAccountManagement, buildUpdateView }

@@ -112,7 +112,7 @@ Util.buildClassificationGrid = async function(data){
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 /* ****************************************
-* Middleware to check token validity
+* Middleware to check token validity, used in server for universal middleware
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {

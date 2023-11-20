@@ -20,7 +20,7 @@ const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 
 /* ***********************
- * Middleware
+ * Middleware   Universal
  * ************************/
 app.use(session({
   store: new (require('connect-pg-simple')(session))({

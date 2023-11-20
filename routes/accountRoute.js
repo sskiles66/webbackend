@@ -13,6 +13,8 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
 router.get("/registeration", utilities.handleErrors(accountController.buildRegisteration))
 
+router.get("/update/:account_id", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdateView))
+
 // Process the registration data
 router.post(
     "/registeration",

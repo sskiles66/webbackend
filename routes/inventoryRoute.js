@@ -13,13 +13,13 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 //router.get("/detail/:inv_id", invController.buildInvItem);
 router.get("/detail/:inv_id", utilities.handleErrors(invController.buildInvItem))
 
-router.get("/", utilities.handleErrors(invController.buildManagement))
+router.get("/", utilities.checkLogin, utilities.handleErrors(invController.buildManagement)) // Needs to be protected, for admin and employee
 
-router.get("/newClassification", utilities.handleErrors(invController.buildNewClassification))
+router.get("/newClassification", utilities.checkLogin, utilities.handleErrors(invController.buildNewClassification)) // Needs to be protected, for admin and employee
 
-router.get("/newInvItem", utilities.handleErrors(invController.buildNewInventoryItem))
+router.get("/newInvItem", utilities.checkLogin, utilities.handleErrors(invController.buildNewInventoryItem)) // Needs to be protected, for admin and employee
 
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get("/getInventory/:classification_id", utilities.checkLogin, utilities.handleErrors(invController.getInventoryJSON)) // Needs to be protected, for admin and employee
 
 
 //Builds edit view for chosen inventory item
@@ -47,7 +47,7 @@ router.post(
 // For submit form on the edit inventory view
 router.post(
   "/update/", 
-  classValidate.newInventoryItemRules(),
+  classValidate.newInventoryItemRules(),  //Specific middleware
   classValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory),
   );
