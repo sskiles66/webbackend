@@ -47,7 +47,7 @@ invCont.buildManagement = async function (req, res, next) {
     
     })
   }else{
-    req.flash("notice", "Please log in as an employee or admin.")
+    req.flash("Please log in as an employee or admin.")
     return res.redirect("/account/login")
   }
   
@@ -66,7 +66,7 @@ invCont.buildNewClassification = async function (req, res, next) {
     
   })
   }else{
-    req.flash("notice", "Please log in as an employee or admin.")
+    req.flash("Please log in as an employee or admin.")
     return res.redirect("/account/login")
   }
 }
@@ -118,7 +118,7 @@ invCont.buildNewInventoryItem = async function (req, res, next) {
     
   })
   }else{
-    req.flash("notice", "Please log in as an employee or admin.")
+    req.flash("Please log in as an employee or admin.")
     return res.redirect("/account/login")
   }
   
@@ -174,7 +174,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
       next(new Error("No data returned"))
     }
   }else{
-    req.flash("notice", "Please log in as an employee or admin.")
+    req.flash("Please log in as an employee or admin.")
     return res.redirect("/account/login")
   }
 }

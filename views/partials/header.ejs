@@ -6,7 +6,7 @@
     <div id="tools">
       <% if (locals.loggedin == 1){ %>
         <a title="Click to view account management" href="/account/">Welcome <%=locals.accountData.account_firstname%></a>
-        <a title="Click to log out" href="#">Logout</a>
+        <a title="Click to log out" href="/logout">Logout</a>
       <%}else{%>
         <a title="Click to log in" href="/account/login">My Account</a>
       <% } %>

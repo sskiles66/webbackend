@@ -66,6 +66,11 @@ app.use(static)
 app.use("/inv", inventoryRoute)
 app.use("/account", require("./routes/accountRoute")) //could also be required above and be a variable
 
+//For logging out
+app.get('/logout', (req, res) => {
+  res.clearCookie('jwt');
+  res.redirect('/');
+});
 
 // Index Route
 //The route will lead to a controller

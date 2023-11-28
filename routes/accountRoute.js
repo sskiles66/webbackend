@@ -32,4 +32,20 @@ router.post(
     
   )
 
+router.post(
+    "/update/", 
+    regValidate.updateRules(),
+    regValidate.checkUpdateData,
+    utilities.handleErrors(accountController.updateAccount),
+    );
+
+
+router.post(
+  "/updatePassword/", 
+  regValidate.updatePasswordRules(),
+  regValidate.checkUpdateData,
+  utilities.handleErrors(accountController.updatePassword),
+  );
+
+
 module.exports = router
