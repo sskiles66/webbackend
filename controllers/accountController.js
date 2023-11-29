@@ -165,8 +165,11 @@ async function updateAccount(req, res, next) {
 
   if (updateResult) {
     // const itemName = updateResult.inv_make + " " + updateResult.inv_model
-    res.locals.accountData.account_firstname = account_firstname;
+    // res.locals.accountData.account_firstname = account_firstname;
     req.flash("notice", `Your account was successfully updated.`)
+    res.clearCookie('jwt');
+    const accessToken = jwt.sign(req.body, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
     res.redirect("/account/")
   } else {
     // const classificationSelect = await utilities.buildClassDropDown(classification_id)
@@ -204,7 +207,10 @@ async function updatePassword(req, res) {
         title: "Update Account",
         nav,
         errors: null, 
-        account_id: account_id
+        account_id: account_id,
+        account_firstname: res.locals.accountData.account_firstname,
+        account_lastname: res.locals.accountData.account_lastname,
+        account_email: res.locals.accountData.account_email
       })
   }
 
@@ -224,7 +230,10 @@ async function updatePassword(req, res) {
       title: "Update Account",
       nav,
       errors: null, 
-      account_id: account_id
+      account_id: account_id,
+      account_firstname: res.locals.accountData.account_firstname,
+      account_lastname: res.locals.accountData.account_lastname,
+      account_email: res.locals.accountData.account_email
     })
   }
 }

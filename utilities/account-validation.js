@@ -188,7 +188,7 @@ validate.checkUpdateData = async (req, res, next) => {
 
 validate.checkPasswordData = async (req, res, next) => {
     // const { account_password } = req.body
-    const { account_id, account_firstname, account_lastname, account_email } = req.body
+    const { account_id} = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -198,9 +198,9 @@ validate.checkPasswordData = async (req, res, next) => {
         nav,
         errors,
         account_id: account_id,
-        // account_firstname: account_firstname,
-        // account_lastname,
-        // account_email,
+        account_firstname: res.locals.accountData.account_firstname,
+        account_lastname: res.locals.accountData.account_lastname,
+        account_email: res.locals.accountData.account_email
       })
       return
     }

@@ -43,7 +43,7 @@ router.post(
 router.post(
   "/updatePassword/", 
   regValidate.updatePasswordRules(),
-  regValidate.checkUpdateData,
+  regValidate.checkPasswordData,
   utilities.handleErrors(accountController.updatePassword),
   );
 

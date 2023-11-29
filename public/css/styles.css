@@ -47,6 +47,11 @@
   text-decoration: none;
 }
 
+#tools >* {
+  margin: 5px;
+  padding: 5px;
+}
+
 
 #top-header {
   display: flex;
@@ -172,7 +177,7 @@ nav {
 
 /*login page*/
 
-#login, #register, #classification, #inventory {
+#login, #register, #classification, #inventory, #accountUpdate, #passwordUpdate {
   text-align: center;
   background-color: #0ACDEB;
   width: 90%;
@@ -202,7 +207,7 @@ input, textarea, select{
 
 input[type="submit"] {
   background-color: #4CAF50;
-  color: white;
+  color: black;
   padding: 10px;
   border-radius: 5px;
   border: none;
@@ -272,7 +277,7 @@ input:required:valid {
 
   }
 
-  #login, #register, #inventory, #classification {
+  #login, #register, #inventory, #classification, #accountUpdate, #passwordUpdate {
     
     width: 50%;
     
