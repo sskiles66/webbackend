@@ -23,10 +23,10 @@ router.get("/getInventory/:classification_id", utilities.checkLogin, utilities.h
 
 
 //Builds edit view for chosen inventory item
-router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInvView))
+router.get("/edit/:inv_id", utilities.checkLogin, utilities.handleErrors(invController.buildEditInvView))
 
 //Builds delete view for chosen inventory item
-router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteInvView))
+router.get("/delete/:inv_id", utilities.checkLogin, utilities.handleErrors(invController.buildDeleteInvView))
 
 router.post(
     "/newClassification",

@@ -47,7 +47,7 @@ invCont.buildManagement = async function (req, res, next) {
     
     })
   }else{
-    req.flash("Please log in as an employee or admin.")
+    req.flash("notice", "Please log in as an employee or admin.")
     return res.redirect("/account/login")
   }
   
@@ -66,7 +66,7 @@ invCont.buildNewClassification = async function (req, res, next) {
     
   })
   }else{
-    req.flash("Please log in as an employee or admin.")
+    req.flash("notice", "Please log in as an employee or admin.")
     return res.redirect("/account/login")
   }
 }
@@ -118,7 +118,7 @@ invCont.buildNewInventoryItem = async function (req, res, next) {
     
   })
   }else{
-    req.flash("Please log in as an employee or admin.")
+    req.flash("notice", "Please log in as an employee or admin.")
     return res.redirect("/account/login")
   }
   
@@ -174,51 +174,59 @@ invCont.getInventoryJSON = async (req, res, next) => {
       next(new Error("No data returned"))
     }
   }else{
-    req.flash("Please log in as an employee or admin.")
-    return res.redirect("/account/login")
+    req.flash("notice", "Please log in as an employee or admin.");
+    return res.redirect("/account/login");
   }
 }
 
 
 //Builds and renders edit view
 invCont.buildEditInvView = async function (req, res, next) {
+
+  if (res.locals.accountData.account_type == "Employee" || res.locals.accountData.account_type == "Admin"){
+    let nav = await utilities.getNav();
   
-  let nav = await utilities.getNav();
-  
-  const inv_id = parseInt(req.params.inv_id);
+    const inv_id = parseInt(req.params.inv_id);
 
-  const itemsData = await invModel.getInventoryItem(inv_id);
+    const itemsData = await invModel.getInventoryItem(inv_id);
 
-  // itemsData returns data.rows so [0] is necessary to get the item.
+    // itemsData returns data.rows so [0] is necessary to get the item.
 
-  const itemData = itemsData[0]
+    const itemData = itemsData[0]
 
-  console.log(itemData[0]);
+    console.log(itemData[0]);
 
-  let dropDown = await utilities.buildClassDropDown(itemData.classification_id);
+    let dropDown = await utilities.buildClassDropDown(itemData.classification_id);
 
-  const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
 
-  console.log(itemName);
+    console.log(itemName);
 
-  res.render("./inventory/edit-inventory", {
-    title: "Edit " + itemName,
-    nav,
-    errors: null,
-    dropDown: dropDown,
-    inv_id: itemData.inv_id,
-    inv_make: itemData.inv_make,
-    inv_model: itemData.inv_model,
-    inv_year: itemData.inv_year,
-    inv_description: itemData.inv_description,
-    inv_image: itemData.inv_image,
-    inv_thumbnail: itemData.inv_thumbnail,
-    inv_price: itemData.inv_price,
-    inv_miles: itemData.inv_miles,
-    inv_color: itemData.inv_color,
-    classification_id: itemData.classification_id
+    res.render("./inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      errors: null,
+      dropDown: dropDown,
+      inv_id: itemData.inv_id,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_description: itemData.inv_description,
+      inv_image: itemData.inv_image,
+      inv_thumbnail: itemData.inv_thumbnail,
+      inv_price: itemData.inv_price,
+      inv_miles: itemData.inv_miles,
+      inv_color: itemData.inv_color,
+      classification_id: itemData.classification_id
+      
+    })
     
-  })
+  }else{
+    req.flash("notice", "Please log in as an employee or admin.")
+    return res.redirect("/account/login")
+  }
+  
+  
 }
 
 /* ***************************
@@ -283,37 +291,45 @@ invCont.updateInventory = async function (req, res, next) {
 
 // Builds delete view for chosen vehicle
 invCont.buildDeleteInvView = async function (req, res, next) {
+
+
+  if (res.locals.accountData.account_type == "Employee" || res.locals.accountData.account_type == "Admin"){
+    let nav = await utilities.getNav();
   
-  let nav = await utilities.getNav();
+    const inv_id = parseInt(req.params.inv_id);
+
+    const itemsData = await invModel.getInventoryItem(inv_id);
+
+    // itemsData returns data.rows so [0] is necessary to get the item.
+
+    const itemData = itemsData[0]
+
+    console.log(itemData[0]);
+
+
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+
+    console.log(itemName);
+
+    res.render("./inventory/delete-confirm", {
+      title: "Delete " + itemName,
+      nav,
+      errors: null,
+      inv_id: itemData.inv_id,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_price: itemData.inv_price,
+
+      classification_id: itemData.classification_id
+      
+    })
+    }else{
+      req.flash("notice", "Please log in as an employee or admin.")
+      return res.redirect("/account/login")
+    }
   
-  const inv_id = parseInt(req.params.inv_id);
-
-  const itemsData = await invModel.getInventoryItem(inv_id);
-
-  // itemsData returns data.rows so [0] is necessary to get the item.
-
-  const itemData = itemsData[0]
-
-  console.log(itemData[0]);
-
-
-  const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
-
-  console.log(itemName);
-
-  res.render("./inventory/delete-confirm", {
-    title: "Delete " + itemName,
-    nav,
-    errors: null,
-    inv_id: itemData.inv_id,
-    inv_make: itemData.inv_make,
-    inv_model: itemData.inv_model,
-    inv_year: itemData.inv_year,
-    inv_price: itemData.inv_price,
-
-    classification_id: itemData.classification_id
-    
-  })
+  
 }
 
 /* ***************************
